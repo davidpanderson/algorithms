@@ -1,0 +1,56 @@
+First, let's think about how to represent result sets more compactly
+than Python sets (which are implemented as hash tables, not
+very space-efficient).
+
+We know that for a set X like (1..n),
+the result set R(X) starts with a long interval.
+After that I imagine they have progressively shorter intervals,
+thinning out to single numbers.
+I assume that for other sets (e.g. (3,4,7,9)) the result sets
+also contain lots of intervals.
+
+So we could represent result sets as "run-encoded sets"
+e.g.
+1 3 -6 10 15
+means
+1 3 6 7 8 9 10 15
+
+To find the results (i.e. the sum/diff/prod/quot) of two sets
+encoded in this way,
+we can do a nested scan of the two sets like we are now,
+and write the results to a bitmask
+and then scan this to convert it to a run-encoded set.
+
+This would use reduce memory usage a lot,
+and I think it would be faster too.
+
+----------------
+
+If we're using run-encoded sets,
+it may be possible to compute the results of 2 sets more efficiently
+than by an N^2 nested scan of their elements.
+
+Given two run-encoded sets, (I assert that) we can 
+efficiently find their sums and differences (as run-encoded sets).
+
+What about product and quotient?
+
+Let's define a "periodic set" is A + range(N)*B
+We can represent this as (A,N,B).
+
+An interval is a period set with B=1.
+
+The product of two intervals is a set of periodic sets.
+the quotient of two intervals is a set of intervals.
+
+So given two sets X and Y (represented as run-encoded)
+their results are a collection of periodic sets.
+
+How can we efficiently convert this to a run-encoded set?
+The general idea:
+- sort the periodic sets by start
+- keep a working set of periodic sets
+- scan 1,2,... checking the working set of periodic sets,
+    building a run-encoded set
+    when encounter an interval, can skip to end
+This algorithm would be somewhat tricky.
