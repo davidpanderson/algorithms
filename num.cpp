@@ -1,4 +1,10 @@
-// for n=10, with -O4, CPU time was 7.76s, RSS was 20920
+// performance with -O4:
+// n=10 (231051): time 7.76s, RSS 21MB
+// N=11 (1765186): time 108 sec, RSS 162 MB
+// N=12 (10539427) 1550 sec, 1.6 GB
+// N=13 ?
+
+// see https://oeis.org/A060315
 
 #include <stdio.h>
 #include <stdlib.h>
@@ -326,7 +332,7 @@ int main(int, char**) {
     //test1(); return 0;
     vector<int> nums;
     double last_cpu_time = 0;
-    for (int i=1; i<11; i++) {
+    for (int i=1; i<14; i++) {
         nums.push_back(i);
         RLES *r = products(nums);
         printf("first missing for %d: %ld\n", i, r->first_missing());
