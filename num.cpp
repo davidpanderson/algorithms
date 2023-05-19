@@ -2,7 +2,7 @@
 // n=10 (231051): time 7.76s, RSS 21MB
 // N=11 (1765186): time 108 sec, RSS 162 MB
 // N=12 (10539427) 1550 sec, 1.6 GB
-// N=13 ?
+// N=13 (95492777) 27088 sec, 13 GB
 
 // see https://oeis.org/A060315
 
