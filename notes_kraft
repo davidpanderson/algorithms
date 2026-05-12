@@ -1,0 +1,93 @@
+phi function: # of lesser co-primes
+
+|| cardinality
+
+phi(phi(n))
+
+proof of infinite primes (parlor trick):
+    X set of all primes
+    W = prod
+    W+1 not divisible by anything in X
+
+    depends on e.g. unique factorization
+        (not true for all number rings)
+    all prime ideals are principal
+
+U(W) = unit group of Z/W
+invertability in Z/W
+
+phi(7) = 6
+phi(6) = 2
+
+phi(31) = 30
+phi(30) = 8
+# of integers < 30 coprime to 30: 8 numbers
+units in Z/30: have inverses
+so it forms an abelian group
+
+so phi() can be interpreted as finding the size of a group
+
+Z/7
+    6 nonzero elements: all invertible
+    true for any prime
+    so it's a field
+
+generalize the parlor trick:
+    W = prod of primes
+    Z/W
+    'lift': set in Z
+    lift of any unit in Z/W (not just 1)
+    {@1}: 7,13,19
+
+    gives you more integers that must have a larger prime factor
+
+twin-genic process
+    take set of all primes up to last twin?
+
+Dirichlet
+    any arith prog a+bn (a,b rel prime)
+    has inf many primes
+    AND fraction of primes from lift of a unit
+        = 1/N where there are N units
+
+is there a 'twin' version of Dirichlet?
+
+All finite fields have P^a elements
+
+example
+    Z/7 is cycle group of order 7
+    multiplicative group F(p*) of nonzero elements is also cyclic
+    There are two generators: 4 and 5
+        (powers of 4 mod 7 give you all elements)
+        call this H(p)
+    no efficient algorithm for finding them?
+    They don't form a subgroup of Z/6
+
+    look at |H(p)| as a function of p
+    not monotonic, but goes up
+
+    but it always goes down for twins!
+
+---------------
+experiments:
+    H(Tb)>H(t#) for all twins
+    up to 15 millions so far
+    look up into trillions?
+
+    computing phi(n)
+    factor into prime powers (slow?)
+    phi(L^k)
+
+    is there a hash table of factorizations?
+-------------
+12  4
+11  0
+10  5
+9   3
+8   4
+7   0
+6   3
+5   0
+4   2
+3   0
+2   0

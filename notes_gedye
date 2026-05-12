@@ -25,32 +25,40 @@ This would use reduce memory usage a lot,
 and I think it would be faster too.
 
 ----------------
+A "run-encoded set" is a list of intervals, perhaps of length 1.
 
-If we're using run-encoded sets,
-it may be possible to compute the results of 2 sets more efficiently
-than by an N^2 nested scan of their elements.
+Given a run-encoded set R, define
+N(R) = the number of elements in the set
+M(R) = the number of intervals in the set
+In general M < N (perhaps significantly)
 
-Given two run-encoded sets, (I assert that) we can 
-efficiently find their sums and differences (as run-encoded sets).
+Given sets Q and R, we currently find their results by 
+looking at all pairs of elements, so the time is N(Q)*N(R).
+Can we reduce this to M(Q)*M(R)?
+I.e. loop over pairs of intervals rather than pairs of numbers.
 
+Given two intervals, we can trivially compute their sum and difference.
 What about product and quotient?
 
-Let's define a "periodic set" is A + range(N)*B
+Define a "periodic set" is A + range(N)*B
 We can represent this as (A,N,B).
 
-An interval is a period set with B=1.
-
 The product of two intervals is a set of periodic sets.
-the quotient of two intervals is a set of intervals.
+Note: unfortunately this becomes O(N), not O(M)
 
-So given two sets X and Y (represented as run-encoded)
-their results are a collection of periodic sets.
+The quotient of two intervals is a set of intervals.
+Again, O(N).
+
+So given two run-encoded sets X and Y
+their results are a collection of periodic sets,
+some of which are intervals.
 
 How can we efficiently convert this to a run-encoded set?
 The general idea:
 - sort the periodic sets by start
-- keep a working set of periodic sets
+- keep a "working set" of periodic sets
 - scan 1,2,... checking the working set of periodic sets,
     building a run-encoded set
     when encounter an interval, can skip to end
 This algorithm would be somewhat tricky.
+And I'm not sure it would be faster than the O(N)^2 alg
